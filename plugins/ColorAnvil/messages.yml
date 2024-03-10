@@ -1,0 +1,7 @@
+prefix: §6ColourAnvil§a> §r
+error:
+  command:
+    permission: §cYou do not have permission to use this command
+    invalid_argument: Invalid Argument!
+warn:
+  banned_word: §cYou cannot use a banned word!

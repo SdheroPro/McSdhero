@@ -1,0 +1,36 @@
+##################################
+#             LINKS              #
+#          VERSION 1.5.1         #
+#         BY SIMPLYTRASH         #
+#        CONTRIBUTIONS BY        #
+#           DYMETHIUS            #
+##################################
+
+#Put all your links here 
+Website: 'BTC Address for donations: 1BnuoDJwzd2hwTiuaZ5D1MqL5H86fJ6x6W'
+Teamspeak: 'BTC Address for donations: 1BnuoDJwzd2hwTiuaZ5D1MqL5H86fJ6x6W'
+Store: 'BTC Address for donations: 1BnuoDJwzd2hwTiuaZ5D1MqL5H86fJ6x6W'
+Discord: 'https://discord.gg/cG9kZRD4'
+YouTube: 'https://www.youtube.com/@techgamerzpro187/videos'
+Facebook: 'BTC Address for donations: 1BnuoDJwzd2hwTiuaZ5D1MqL5H86fJ6x6W'
+Twitter: 'BTC Address for donations: 1BnuoDJwzd2hwTiuaZ5D1MqL5H86fJ6x6W'
+GooglePlus: 'BTC Address for donations: 1BnuoDJwzd2hwTiuaZ5D1MqL5H86fJ6x6W'
+Tumblr: 'BTC Address for donations: 1BnuoDJwzd2hwTiuaZ5D1MqL5H86fJ6x6W'
+ServerIP: '127.0.0.1'
+# For more languages or just new names 
+# This is for the first word that shows up when you type /discord /website /store(/donate) & /teamspeak etc..
+WebsiteReference: 'Website'
+# Example: WebsiteReference: 'The website link is here'
+TeamspeakReference: 'Teamspeak'
+StoreReference: 'Store'
+DiscordReference: 'Discord'
+YouTubeReference: 'YouTube'
+TwitterReference: 'Twitter'
+FacebookReference: 'Facebook'
+GooglePlusReference: 'Google+'
+TumblrReference: 'Tumblr'
+ServerIPReference: 'You are on'
+# These also work with the /links plugin
+
+# HELP SECTION (/links)
+# WILL BE CONFIGURABLE SOON 

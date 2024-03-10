@@ -1,0 +1,28 @@
+color:
+  black: true
+  dark_blue: true
+  dark_green: true
+  dark_aqua: true
+  dark_red: true
+  dark_purple: true
+  gold: true
+  gray: true
+  dark_gray: true
+  blue: true
+  green: true
+  aqua: true
+  red: true
+  light_purple: true
+  yellow: true
+  white: true
+  magic: true
+  bold: true
+  strikethrough: true
+  underline: true
+  italic: true
+  reset: true
+max_lore_count: 20
+ban_words: true
+disable_colour_permissions: true
+disable_lore_permissions: true
+check_update: true

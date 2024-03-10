@@ -1,0 +1,101 @@
+# PerWorldPlugins Configuration
+
+# Disable or Enable the message of new updates.
+updateChecker: true
+# Disable or Enable the bStats metrics.
+metrics: true
+# Message send when execute blocked plugin command.
+disabledCommandMessage: '&4[Server]: &fThis command is disabled for this world.'
+
+# If false, the plugins/groups added in the world will work.
+# If true, it will be reversed.
+blacklist: true
+
+plugins:
+  # For set group set - g:example (example is the name of group)
+  # Add and edit groups in the groups.yml
+  Example:
+  - PutWorldInThisListForDisableThisPluginOnWorld
+  - world
+  Example2:
+  - 'ignore:'
+  Vault:
+  - Example
+  WorldEdit:
+  - Example
+  Economy:
+  - Example
+  SetHome:
+  - Example
+  PluginConstructorAPI:
+  - Example
+  LoginSecurity:
+  - Example
+  LunarFreeCam:
+  - Example
+  PlaceholderAPI:
+  - Example
+  ColorAnvil:
+  - Example
+  ClearLag:
+  - Example
+  AntiSpam:
+  - Example
+  CMILib:
+  - Example
+  ServersNPC:
+  - Example
+  ProBlockedCommands:
+  - Example
+  SimpleTpa:
+  - Example
+  NoTrashPl:
+  - Example
+  BookExploitFix:
+  - Example
+  Links:
+  - Example
+  floodgate:
+  - Example
+  Playtime:
+  - Example
+  AdvancedBan:
+  - Example
+  WorldGuard:
+  - Example
+  Multiverse-Core:
+  - Example
+  AuctionHouse:
+  - Example
+  Multiverse-Inventories:
+  - Example
+  TAB:
+  - Example
+  Geyser-Spigot:
+  - Example
+  Multiverse-Portals:
+  - Example
+  GriefPrevention:
+  - Example
+  DeluxeHub:
+  - Example
+  Essentials:
+  - Example
+  Jobs:
+  - Example
+  PWarp:
+  - Example
+  EssentialsChat:
+  - Example
+  EconomyShopGUI:
+  - Example
+  BetterRTP:
+  - Example
+  FastChunkPregenerator:
+  - Example
+  EcoSystem:
+  - Example
+  playit-gg:
+  - Example
+  PixelPrinter:
+  - Example

@@ -1,0 +1,13 @@
+messages:
+  noPerm: §cNo Permissions!
+  bePlayer: §cYou have to be a Player!
+  noPlayer: §cCan't find that Player!
+  supportmsg: §bWait, help is on your way!
+  needhelp: §bThe Player §c %playername% §b needs help!
+  bcast: §r[§4Broadcast§r] §d
+  noWarp: §cWarp not found!
+  noWorld: §cWorld not found!
+boolean:
+  thechatwasclearedby: '''true'''
+integer:
+  kickafterwarns: '3'

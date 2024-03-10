@@ -1,0 +1,1423 @@
+#-------------------> Welcome to Config <-------------------#
+
+# Type: AntiCheat
+# Creator: NovaCraft254
+# SubCreator: AlexMods
+# Version: Build 11.1
+# Minecraft: 1.8
+# Site of Skript: https://www.spigotmc.org/resources/novadetector-anticheat-skript.74796/
+# Thanks.
+
+#Colors:	
+#Code: %nl% = New Line | SkQuery
+#Code: &0 = Black Color
+#Code: &1 = Dark Blue Color
+#Code: &2 = Dark Green Color
+#Code: &3 = Cyan
+#Code: &4 = Dark Red
+#Code: &5 = Dark Purple
+#Code: &6 = Oranje
+#Code: &7 = Light Gray
+#Code: &8 = Gray Dark
+#Code: &9 = Blue Light
+#Code: &a = Dark Green
+#Code: &b = light Blue
+#Code: &c = Pink
+#Code: &d = Violet
+#Code: &e = Yellow
+#Code: &f = White
+
+#Specials Code:
+#Code Special: &l = Bold font
+#Code Special: &n = Underlined
+#Code Special: &m = Strikethrough
+#Code Special: &k = Random Lycris
+
+#Hacks Detect:
+#Killaura
+#HitReach
+#Anti-KB [The Player is not Move]
+#FastBow
+#Jesus
+#FastEat
+#Fast Place
+
+#Permission:
+#Nova.use
+#Nova.Staff
+#Nova.Reports
+#Nova.Bypass.(Check)
+
+#Commands:
+#/Nova
+#/Nova Help
+#/Nova Help 2
+#/Nova Info
+#/Nova Version
+#/Nova HacksDetect
+#/NovaClear (Player) (check)
+#/Novakick (Player) (kill?) (reason)
+#/Nova Reload
+
+#
+# CONFIG
+# 
+
+options:
+	
+	#Variables:
+		# %{cheat}% - show the detected hack
+	
+	#Messages:
+	Prefix: &2&lNova&4&lDetector
+	MPrefix: &2&lN&4&lD
+	TMPrefix: &2&lN&4&lD&c&lT&4&l
+	SubPrefix: &c&lAntiCheat
+	Version: Build 11.1
+	AutoKickA: &2&lAntiCheat &7» &f%{cheat}%
+	AutoKickV: &2&lAntiCheat &7» &f%{cheat}%
+	AutoKickS: &2&lAntiCheat &7» &f%{cheat}%
+	AutoKickP: &2&lAntiCheat &7» &f%{cheat}%
+	KickForCommand1: &2&lAntiCheat &7» &f%arg 3%.
+	KickForCommand2: &2&lAntiCheat &7» &fNo Motive.
+	NoPermission: &fUnknown command. Type "/help" for help.
+	AlertP: &e&l%player% &ffailed
+	AlertS: &e&l%shooter% &ffailed
+	AlertV: &e&l%victim% &ffailed
+	AlertA: &e&l%attacker% &ffailed
+	AlertLP: &e&l%loop-player% &ffailed
+	AlertLP1: &e&l%loop-player-1% &ffailed
+	KickP: &e&l%player% &fwas removed for &4%{cheat}%
+	KickS: &e&l%shooter% &fwas removed for &4%{cheat}%
+	KickV: &e&l%victim% &fwas removed for &4%{cheat}%
+	KickA: &e&l%attacker% &fwas removed for &4%{cheat}%
+	KickLP: &e&l%loop-player% &fwas removed for &4%{cheat}%
+	KickLP1: &e&l%loop-player-1% &fwas removed for &4%{cheat}%
+	MessageAllChat1P: &8&m-------------------------------------------
+	MessageAllChat2P: &8» &c%player% &fhas been kicked.
+	MessageAllChat3P: &c&lReason &8» &cHacking &8(&c%{cheat}%&8)
+	MessageAllChat4P: &8&m-------------------------------------------
+	MessageAllChat1A: &8&m-------------------------------------------
+	MessageAllChat2A: &8» &c%attacker% &fhas been kicked.
+	MessageAllChat3A: &c&lReason &8» &cHacking &8(&c%{cheat}%&8)
+	MessageAllChat4A: &8&m-------------------------------------------
+	MessageAllChat1S: &8&m-------------------------------------------
+	MessageAllChat2S: &8» &c%shooter% &fhas been kicked.
+	MessageAllChat3S: &c&lReason &8» &cHacking &8(&c%{cheat}%&8)
+	MessageAllChat4S: &8&m-------------------------------------------
+	MessageAllChat1V: &8&m-------------------------------------------
+	MessageAllChat2V: &8» &c%victim% &fhas been kicked.
+	MessageAllChat3V: &c&lReason &8» &cHacking &8(&c%{cheat}%&8)
+	MessageAllChat4V: &8&m-------------------------------------------
+	MessageAllChat1LP: &8&m-------------------------------------------
+	MessageAllChat2LP: &8» &c%loop-player% &fhas been kicked.
+	MessageAllChat3LP: &c&lReason &8» &cHacking &8(&c%{cheat}%&8)
+	MessageAllChat4LP: &8&m-------------------------------------------
+	
+	# Checks:
+	# HitReach
+	Reach-Distance: 5
+	Reach-Cancel: true
+	
+	# KillAura
+	Killaura-Distance: 3.8
+	Killaura-CPS: 14
+	Killaura-Ticks: 2.1
+	Killaura-Cancel: true
+	
+	# Anti-KB | Velocity
+	AntiKB-Distance: 1.01
+	AntiKB-Cancel: true
+	
+	# FastBow
+	FastBow-Shoots: 6
+	FastBow-Ticks: 1.8
+	
+	# Jesus
+	Jesus-Distance: 0.75
+	Jesus-Cancel: true
+	
+	# FastEat
+	FastEat-Second: 1
+	FastEat-Cancel: true
+	
+	# FastPlace
+	FastPlace-Blocks: 6
+	FastPlace-Reset: 0.8
+	FastPlace-Cancel: true
+
+#
+# End of Config
+#
+
+
+#
+#SKRIPT
+#Please not touch!
+#
+
+on skript start:
+
+	# KillAura
+	if {KillauraCheckFFB:N} is not set:
+		set {KillauraCheckFFB:N} to true
+	if {KillAuraCheck} is not set:
+		set {KillAuraCheck} to "&eEnabled"
+
+	# AntiKB
+	if {AntiKBCheckFFB:N} is not set:
+		set {AntiKBCheckFFB:N} to true
+	if {AntiKBCheck} is not set:
+		set {AntiKBCheck} to "&eEnabled"
+
+	# Reach
+	if {AutoActiveKill::N} is not set:
+		set {AutoActiveKill::N} to true
+	if {ReachCheckFFB:N} is not set:
+		set {ReachCheckFFB:N} to true
+	if {ReachCheck} is not set:
+		set {ReachCheck} to "&eEnabled"
+
+	# FastBow
+	if {FastBowCheckFFB:N} is not set:
+		set {FastBowCheckFFB:N} to true
+	if {FastBowCheck} is not set:
+		set {FastBowCheck} to "&eEnabled"
+
+	# FastEat
+	if {FastEatCheckFFB:N} is not set:
+		set {FastEatCheckFFB:N} to true
+	if {FastEat:Check} is not set:
+		set {FastEat:Check} to "&eEnabled"
+
+	# Jesus	
+	if {JesusCheckFFB:N} is not set:
+		set {JesusCheckFFB:N} to true
+	if {Jesus::Check} is not set:
+		set {Jesus::Check} to "&eEnabled"
+
+	# FastPlace
+	if {FastPlaceCheckFFB:N} is not set:
+		set {FastPlaceCheckFFB:N} to true
+	if {FastPlaceCheck} is not set:
+		set {FastPlaceCheck} to "&eEnabled"
+		
+	message "" to console
+	set {TestMode} to "&eDisabled"
+	set {TestMode::N} to false
+	message "&2&lNova&4&lDetector &bService &eHas been enabled (Version: Build 11.1)" to console
+	message "&2&lNova&4&lDetector &bService &aServer Version &e(Auto-Detect): &b%minecraft version%" to console
+	message "&2&lNova&4&lDetector &bService &aBukkit Version &e(Auto-Detect): &b%bukkit version%" to console
+	message "&2&lNova&4&lDetector &bService &aSkript Version &e(Auto-Detect): &b%skript version%" to console
+	message "&2&lNova&4&lDetector &a&lKillaura  &e&lEnabled &8| &fStatus: %{KillAuraCheck}%" to console
+	message "&2&lNova&4&lDetector &a&lAntiKB    &e&lEnabled &8| &fStatus: %{AntiKBCheck}%" to console
+	message "&2&lNova&4&lDetector &a&lReach     &e&lEnabled &8| &fStatus: %{ReachCheck}%" to console
+	message "&2&lNova&4&lDetector &a&lFastBow   &e&lEnabled &8| &fStatus: %{FastBowCheck}%" to console
+	message "&2&lNova&4&lDetector &a&lFastEat   &e&lEnabled &8| &fStatus: %{FastEat:Check}%" to console	
+	message "&2&lNova&4&lDetector &a&lJesus     &e&lEnabled &8| &fStatus: %{Jesus::Check}%" to console
+	message "&2&lNova&4&lDetector &a&lFastPlace &e&lEnabled &8| &fStatus: %{FastPlaceCheck}%" to console
+	message "&2&lNova&4&lDetector &a&lThanks for using &2&lNova&4&lDetector" to console
+	message "" to console
+
+on skript stop:
+	message "" to console
+	set {TestMode} to "&eDisabled"
+	set {TestMode::N} to false
+	message "&2&lNova&4&lDetector &bService &eHas been disabled (Version: Build 11.1)" to console
+	message "&2&lNova&4&lDetector &bService &aServer Version &e(Auto-Detect): &b%minecraft version%" to console
+	message "&2&lNova&4&lDetector &bService &aBukkit Version &e(Auto-Detect): &b%bukkit version%" to console
+	message "&2&lNova&4&lDetector &bService &aSkript Version &e(Auto-Detect): &b%skript version%" to console
+	message "&2&lNova&4&lDetector &a&lKillaura  &e&lDisabled &8| &fStatus: %{KillAuraCheck}%" to console
+	message "&2&lNova&4&lDetector &a&lAntiKB    &e&lDisabled &8| &fStatus: %{AntiKBCheck}%" to console
+	message "&2&lNova&4&lDetector &a&lHitReach  &e&lDisabled &8| &fStatus: %{ReachCheck}%" to console
+	message "&2&lNova&4&lDetector &a&lFastBow   &e&lDisabled &8| &fStatus: %{FastBowCheck}%" to console
+	message "&2&lNova&4&lDetector &a&lFastEat   &e&lDisabled &8| &fStatus: %{FastEat:Check}%" to console	
+	message "&2&lNova&4&lDetector &a&lJesus     &e&lDisabled &8| &fStatus: %{Jesus::Check}%" to console
+	message "&2&lNova&4&lDetector &a&lFastPlace &e&lDisabled &8| &fStatus: %{FastPlaceCheck}%" to console
+	message "&2&lNova&4&lDetector &a&lThanks for using &2&lNova&4&lDetector" to console
+	message "" to console
+
+on join:
+	player has permission "Nova.use":
+		wait 1 second
+		set {_update} to text from url "https://pastebin.com/raw/NVFaFeqD"
+		{_update} is not "{@Version}":
+			loop all players:
+				if loop-player has permission "Nova.use":
+					message "{@Prefix} &7» &aUpdate of the AntiCheat" to loop-player
+					message "{@Prefix} &7» &aVersion Installed: &4{@Version}" to loop-player
+					message "{@Prefix} &7» &aVersion Latest: &2%{_update}%" to loop-player
+				message "{@Prefix} &7» &aUpdate of the AntiCheat" to console
+				message "{@Prefix} &7» &aVersion Installed: &4{@Version}" to console
+				message "{@Prefix} &7» &aVersion Latest: &2%{_update}%" to console
+				message "{@Prefix} &7» &aUpdate in: &bhttps://www.spigotmc.org/resources/novadetector-anticheat-skript.74796/" to console
+
+on death:
+	if {Anti-KB.CancelEvent.%player%} is true:
+		set {Anti-KB.CancelEvent.%player%} to false
+		wait 5 second
+		set {Anti-KB.CancelEvent.%player%} to true
+	if {Anti-Clcik.CancelEvent.%player%} is true:
+		set {Anti-Clcik.CancelEvent.%player%} to false
+		wait 5 second
+		set {Anti-Clcik.CancelEvent.%player%} to true
+
+on join:
+	loop 5 times:
+		message "" to player
+	if {VLBreaked::N} is not set:
+		set {VLBreaked::N} to 0
+	if {VLKicked::N} is not set:
+		set {VLKicked::N} to 0
+	loop all players:
+		loop-player has permission "Nova.use" or "Nova.Staff":
+			message "" 
+			message "{@Prefix} &7» &e&lWelcome to the server"
+			message "{@Prefix} &7» &aHas been &b%{VLBreaked::N}% &abreaked violations"
+			message "{@Prefix} &7» &aHas been &b%{VLKicked::N}% &apunished players"
+			message "" 
+	if {Anti-KB.CancelEvent.%player%} is true:
+		set {Anti-KB.CancelEvent.%player%} to false
+		wait 5 second
+		set {Anti-KB.CancelEvent.%player%} to true
+	if {Anti-Clcik.CancelEvent.%player%} is true:
+		set {Anti-Clcik.CancelEvent.%player%} to false
+		wait 5 second
+		set {Anti-Clcik.CancelEvent.%player%} to true
+
+command /Nova [<text>]:
+	permission: Nova.use
+	permission message: {@NoPermission}
+	aliases: /NovaDetector, /AntiCheat
+	usage: /Nova [<text>]
+	trigger:
+		if arg-1 is not set:
+			if sender has permission "Nova.use":
+				send "" to sender
+				send "&4&l================&b&l[1/2]&4&l====================" to sender
+				send "{@Prefix} &e&lCommands:" to sender		  
+				send "" to sender
+				send "&4&l/Nova &2&lVersion" to sender		  
+				send "&4&l/Nova &2&lHacksDetect" to sender
+				send "&4&l/Nova &2&lhelp [1/2]" to sender
+				send "&4&l/Nova &2&lInfo" to sender
+				send "&2&l================&b&l[1/2]&2&l==================" to sender
+				stop
+		if arg-1 is "help 2":
+			if sender has permission "Nova.use":
+				send "" to sender
+				send "&4&l================&b&l[2/2]&4&l====================" to sender
+				send "{@Prefix} &e&lCommands:" to sender		  
+				send "" to sender
+				send "&4&l/NovaKick &2&l[Player] &b&l[Reason]" to sender
+				send "&4&l/Nova &2&lGui" to sender
+				send "&4&l/NovaClear &2&l[Player] &b&l[Check]" to sender
+				send "&4&l/Nova &2&lReload" to sender
+				send "&2&l================&b&l[2/2]&2&l====================" to sender
+				stop
+		if arg-1 is "Version":
+			if sender has permission "Nova.use":
+				send "&4&l========================================" to sender
+				send "&4&lVersion:" to sender
+				send "&2&lBuild 11.1" to sender				  	  
+				send "&2&l========================================" to sender
+				stop
+		if arg-1 is "HacksDetect":
+			if sender has permission "Nova.use":
+				send "&4&l========================================" to sender
+				send "&b&lHacksDetect:" to sender			  
+				send "" to sender									  		  
+				send "&2&lKillaura &a&l(Done)" to sender
+				send "&2&lAntiKB &a&l(Done)" to sender
+				send "&2&lHitReach &a&l(Done)" to sender
+				send "&2&lFastBow &a&l(Done)" to sender
+				send "&2&lJesus &a&l(Done)" to sender
+				send "&2&lFastEat &a&l(Done)" to sender
+				send "&2&lFastPlace &a&l(Done)" to sender
+				send "" to sender		  
+				send "&2&l========================================" to sender
+				stop
+		if arg-1 is "help":
+			if sender has permission "Nova.use":
+				send "" to sender
+				send "&4&l================&b&l[1/2]&4&l====================" to sender
+				send "{@Prefix} &b&lCommands:" to sender		  
+				send "" to sender
+				send "&4&l/Nova &2&lVersion" to sender		  
+				send "&4&l/Nova &2&lHacksDetect" to sender
+				send "&4&l/Nova &2&lhelp [1/2]" to sender
+				send "&4&l/Nova &2&lInfo" to sender
+				send "&2&l================&b&l[1/2]&2&l====================" to sender
+				stop
+		if arg-1 is "Info":
+			if sender has permission "Nova.use":
+				send "&4&l========================================" to sender
+				send "{@Prefix}:" to sender				
+				send "" to sender		 				          
+				send "&4&lCreator: &2&lNovaCraft254" to sender	   
+				send "&4&lSubCreator: &2&lAlexMod" to sender
+				send "" to sender
+				send "&4&lStart of the project: &2&l29/1/2020" to sender				
+				send "&2&l========================================" to sender
+				stop
+		if arg-1 is "Reload":
+			if sender has permission "Nova.use":
+				message "{@Prefix} &7» &aReloading..." to sender
+				execute console command "/sk reload %script%"
+				message "{@Prefix} &7» &aReloaded!" to sender
+				stop
+		if arg-1 is "Gui":
+			if player has permission "Nova.use":
+				message "{@Prefix} &7» &bOpen Gui..." to sender
+				wait 0.1 seconds
+				open chest with 4 rows named "{@Prefix}" to player
+				wait 0.1 seconds
+				format slot 4 of player with Block of Redstone named "&c&lClose Menu" to close
+				format slot 20 of player with chest named "&e&lChecks" to close then run [execute player command "/ChecksMenu"]
+				format slot 24 of player with paper named "&e&lTestMode" with lore "&bStatus: %{TestMode}%" to close then run [execute player command "/novatoggle testmode"]
+				stop
+
+command /ChecksMenu:
+	permission: Nova.use
+	permission message: {@NoPermission}
+	trigger:
+		wait 0.1 seconds
+		open chest with 5 rows named "{@Prefix}> &eChecks" to player
+		wait 0.1 seconds
+		format slot 4 of player with Block of Redstone named "&c&lClose Menu" to close
+		format slot 0 of player with Green Wool named "&2&lEnable All Checks" to close then run [execute player command "/novatoggle all enable"]
+		format slot 8 of player with Red Wool named "&c&lDisable All Checks" to close then run [execute player command "/novatoggle all disable"]
+		format slot 9 of player with Diamond Sword named "&a&lCombat &e&lBlocks" to close
+		format slot 10 of player with Paper named "&a&lHitReach &e&lCheck" with lore "&bStatus: %{ReachCheck}%" to close then run [execute player command "/novatoggle hitreach"]
+		format slot 11 of player with Paper named "&a&lKillAura &e&lCheck" with lore "&bStatus: %{KillAuraCheck}%" to close then run [execute player command "/novatoggle killaura"]
+		format slot 12 of player with Paper named "&a&lFastBow &e&lCheck" with lore "&bStatus: %{FastBowCheck}%" to close then run [execute player command "/novatoggle fastbow"]
+		format slot 18 of player with Diamond Boots named "&a&lMovement &e&lBlocks:" to close
+		format slot 19 of player with Paper named "&a&lAntiKnockback &e&lCheck" with lore "&bStatus: %{AntiKBCheck}%" to close then run [execute player command "/novatoggle antikb"]
+		format slot 20 of player with paper named "&a&lJesus &e&lCheck" with lore "&bStatus: %{Jesus::Check}%" to close then run [execute player command "/novatoggle jesus"]
+		format slot 27 of player with Diamond Helmet named "&a&lPlayer &e&lBlocks" to close
+		format slot 28 of player with paper named "&a&lFastEat &e&lCheck" with lore "&bStatus: %{FastEat:Check}%" to close then run [execute player command "/novatoggle fasteat"]
+		format slot 36 of player with Grass named "&a&lWorld &e&lBlocks" to close
+		format slot 37 of player with paper named "&a&lFastPlace &e&lCheck" with lore "&bStatus: %{FastPlaceCheck}%" to close then run [execute player command "/novatoggle fastplace"]
+		stop
+	
+command /novatoggle [<text>] [<text>]:
+	permission: Nova.use
+	permission message: {@NoPermission}
+	trigger:
+		if arg-1 is "all":
+			if arg-2 is "enable":
+				set {ReachCheckFFB:N} to true
+				set {AutoActiveKill::N} to true
+				set {ReachCheck} to "&eEnabled"
+				set {KillAuraCheckFFB:N} to true
+				set {KillauraCheck} to "&eEnabled"
+				set {FastBowCheckFFB:N} to true
+				set {FastBowCheck} to "&eEnabled"
+				set {AntiKBCheckFFB:N} to true
+				set {AntiKBCheck} to "&eEnabled"
+				set {JesusCheckFFB:N} to true
+				set {Jesus::Check} to "&eEnabled"
+				set {FastEatCheckFFB:N} to true
+				set {FastEat:Check} to "&eEnabled"
+				set {FastPlaceCheckFFB:N} to true
+				set {FastPlaceCheck} to "&eEnabled"
+				wait 0.1 seconds
+				execute player command "/ChecksMenu"
+				loop all players:
+					if loop-player has permission "Nova.use":
+						message "{@MPrefix} &7» &aAll Checks has been enabled for &e%sender%" to loop-player	
+						stop
+		if arg-1 is "all":
+			if arg-2 is "disable":
+				set {ReachCheckFFB:N} to false
+				set {AutoActiveKill::N} to false
+				set {ReachCheck} to "&eDisabled"
+				set {KillAuraCheckFFB:N} to false
+				set {KillauraCheck} to "&eDisabled"
+				set {FastBowCheckFFB:N} to false
+				set {FastBowCheck} to "&eDisabled"
+				set {AntiKBCheckFFB:N} to false
+				set {AntiKBCheck} to "&eDisabled"
+				set {JesusCheckFFB:N} to false
+				set {Jesus::Check} to "&eDisabled"
+				set {FastEatCheckFFB:N} to false
+				set {FastEat:Check} to "&eDisabled"
+				set {FastPlaceCheckFFB:N} to false
+				set {FastPlaceCheck} to "&eDisabled"
+				wait 0.1 seconds
+				execute player command "/ChecksMenu"
+				loop all players:
+					if loop-player has permission "Nova.use":
+						message "{@MPrefix} &7» &cAll Checks has been disabled for &e%sender%" to loop-player
+						stop
+		if arg-1 is "hitreach":
+			if arg-2 is not set:
+				wait 0.1 seconds
+				open chest with 1 rows named "{@Prefix}> &eHitReach" to player
+				wait 0.1 seconds
+				format slot 2 of player with Green Wool named "&aOn" to close then run [execute player command "/novatoggle hitreach enable"]
+				format slot 4 of player with Glass pane named "&bStatus: %{ReachCheck}%" to close
+				format slot 6 of player with Red Wool named "&cOff" to close then run [execute player command "/novatoggle hitreach disable"]
+				stop
+			if arg-2 is "enable":
+				set {ReachCheckFFB:N} to true
+				set {AutoActiveKill::N} to true
+				wait 0.1 seconds
+				execute player command "/ChecksMenu"
+				loop all players:
+					if loop-player has permission "Nova.use":
+						message "{@MPrefix} &7» &aThe player: &e%sender% &ahas been enable check &eHitReach" to loop-player
+						set {ReachCheck} to "&eEnabled"
+						stop
+			if arg-2 is "disable":
+				set {ReachCheckFFB:N} to false
+				set {AutoActiveKill::N} to false
+				wait 0.1 seconds
+				execute player command "/ChecksMenu"
+				loop all players:
+					if loop-player has permission "Nova.use":
+						message "{@MPrefix} &7» &aThe player: &e%sender% &ahas been &cdisable check &eHitReach" to loop-player
+						set {ReachCheck} to "&eDisabled"
+						stop
+		if arg-1 is "killaura":
+			if arg-2 is not set:
+				wait 0.1 seconds
+				open chest with 1 rows named "{@Prefix}> &eKillAura" to player
+				wait 0.1 seconds
+				format slot 2 of player with Green Wool named "&aOn" to close then run [execute player command "/novatoggle killaura enable"]
+				format slot 4 of player with Glass pane named "&bStatus: %{KillAuraCheck}%" to close
+				format slot 6 of player with Red Wool named "&cOff" to close then run [execute player command "/novatoggle killaura disable"]
+				stop
+			if arg-2 is "enable":
+				set {KillAuraCheckFFB:N} to true
+				wait 0.1 seconds
+				execute player command "/ChecksMenu"
+				loop all players:
+					if loop-player has permission "Nova.use":
+						message "{@MPrefix} &7» &aThe player: &e%sender% &ahas been enable check &eKillAura" to loop-player
+						set {KillAuraCheck} to "&eEnabled"
+						stop
+			if arg-2 is "disable":
+				set {KillAuraCheckFFB:N} to false
+				wait 0.1 seconds
+				execute player command "/ChecksMenu"
+				loop all players:
+					if loop-player has permission "Nova.use":
+						message "{@MPrefix} &7» &aThe player: &e%sender% &ahas been &cdisable check &eKillAura" to loop-player
+						set {KillAuraCheck} to "&eDisabled"
+						stop
+		if arg-1 is "fastbow":
+			if arg-2 is not set:
+				wait 0.1 seconds
+				open chest with 1 rows named "{@Prefix}> &eFastBow" to player
+				wait 0.1 seconds
+				format slot 2 of player with Green Wool named "&aOn" to close then run [execute player command "/novatoggle fastbow enable"]
+				format slot 4 of player with Glass pane named "&bStatus: %{FastBowCheck}%" to close
+				format slot 6 of player with Red Wool named "&cOff" to close then run [execute player command "/novatoggle fastbow disable"]
+				stop
+			if arg-2 is "enable":
+				set {FastBowCheckFFB:N} to true
+				wait 0.1 seconds
+				execute player command "/ChecksMenu"
+				loop all players:
+					if loop-player has permission "Nova.use":
+						message "{@MPrefix} &7» &aThe player: &e%sender% &ahas been enable check &eFastBow" to loop-player
+						set {FastBowCheck} to "&eEnabled"
+						stop
+			if arg-2 is "disable":
+				set {FastBowCheckFFB:N} to false
+				wait 0.1 seconds
+				execute player command "/ChecksMenu"
+				loop all players:
+					if loop-player has permission "Nova.use":
+						message "{@MPrefix} &7» &aThe player: &e%sender% &ahas been &cdisable check &eFastBow" to loop-player
+						set {FastBowCheck} to "&eDisabled"
+						stop
+		if arg-1 is "antikb":
+			if arg-2 is not set:
+				wait 0.1 seconds
+				open chest with 1 rows named "{@Prefix}> &eAntiKB" to player
+				wait 0.1 seconds
+				format slot 2 of player with Green Wool named "&aOn" to close then run [execute player command "/novatoggle antikb enable"]
+				format slot 4 of player with Glass pane named "&bStatus: %{AntiKBCheck}%" to close
+				format slot 6 of player with Red Wool named "&cOff" to close then run [execute player command "/novatoggle antikb enable"]
+				stop
+			if arg-2 is "enable":
+				set {AntiKBCheckFFB:N} to true
+				wait 0.1 seconds
+				execute player command "/ChecksMenu"
+				loop all players:
+					if loop-player has permission "Nova.use":
+						message "{@MPrefix} &7» &aThe player: &e%sender% &ahas been enable check &eAntiKB" to loop-player
+						set {AntiKBCheck} to "&eEnabled"
+						stop
+			if arg-2 is "disable":
+				set {AntiKBCheckFFB:N} to false
+				wait 0.1 seconds
+				execute player command "/ChecksMenu"
+				loop all players:
+					if loop-player has permission "Nova.use":
+						message "{@MPrefix} &7» &aThe player: &e%sender% &ahas been &cdisable check &eAntiKB" to loop-player
+						set {AntiKBCheck} to "&eDisabled"
+						stop
+		if arg-1 is "testmode":
+			if arg-2 is not set:
+				wait 0.1 seconds
+				open chest with 1 rows named "{@Prefix}> &cTestMode" to player
+				wait 0.1 seconds
+				format slot 2 of player with Green Wool named "&aOn" to close then run [execute player command "/novatoggle testmode enable"]
+				format slot 4 of player with Glass pane named "&bStatus: %{TestMode}%" to close
+				format slot 6 of player with Red Wool named "&cOff" to close then run [execute player command "/novatoggle testmode disable"]
+				stop
+			if arg-2 is "enable":
+				set {TestMode::N} to true
+				wait 0.1 seconds
+				execute player command "/nova gui"
+				loop all players:
+					if loop-player has permission "Nova.use":
+						message "{@MPrefix} &7» &aThe player: &e%sender% &ahas been enable &cTestMode" to loop-player
+						set {TestMode} to "&eEnabled"
+						stop
+			if arg-2 is "disable":
+				set {TestMode::N} to false
+				wait 0.1 seconds
+				execute player command "/nova gui"
+				loop all players:
+					if loop-player has permission "Nova.use":
+						message "{@MPrefix} &7» &aThe player: &e%sender% &ahas been &cdisable TestMode" to loop-player
+						set {TestMode} to "&eDisabled"
+						stop
+		if arg-1 is "jesus":
+			if arg-2 is not set:
+				wait 0.1 seconds
+				open chest with 1 rows named "{@Prefix}> &eJesus" to player
+				wait 0.1 seconds
+				format slot 2 of player with Green Wool named "&aOn" to close then run [execute player command "/novatoggle jesus enable"]
+				format slot 4 of player with Glass pane named "&bStatus: %{Jesus::Check}%" to close
+				format slot 6 of player with Red Wool named "&cOff" to close then run [execute player command "/novatoggle jesus disable"]
+				stop
+			if arg-2 is "enable":
+				set {JesusCheckFFB:N} to true
+				wait 0.1 seconds
+				execute player command "/ChecksMenu"
+				loop all players:
+					if loop-player has permission "Nova.use":
+						message "{@MPrefix} &7» &aThe player: &e%sender% &ahas been enable check &eJesus" to loop-player
+						set {Jesus::Check} to "&eEnabled"
+						stop
+			if arg-2 is "disable":
+				set {JesusCheckFFB:N} to false
+				wait 0.1 seconds
+				execute player command "/ChecksMenu"
+				loop all players:
+					if loop-player has permission "Nova.use":
+						message "{@MPrefix} &7» &aThe player: &e%sender% &ahas been &cdisable check Jesus" to loop-player
+						set {Jesus::Check} to "&eDisabled"
+						stop
+		if arg-1 is "fasteat":
+			if arg-2 is not set:
+				wait 0.1 seconds
+				open chest with 1 rows named "{@Prefix}> &eFastEat" to player
+				wait 0.1 seconds
+				format slot 2 of player with Green Wool named "&aOn" to close then run [execute player command "/novatoggle fasteat enable"]
+				format slot 4 of player with Glass pane named "&bStatus: %{FastEat:Check}%" to close
+				format slot 6 of player with Red Wool named "&cOff" to close then run [execute player command "/novatoggle fasteat disable"]
+				stop
+			if arg-2 is "enable":
+				set {FastEatCheckFFB:N} to true
+				wait 0.1 seconds
+				execute player command "/ChecksMenu"
+				loop all players:
+					if loop-player has permission "Nova.use":
+						message "{@MPrefix} &7» &aThe player: &e%sender% &ahas been enable check &eFastEat" to loop-player
+						set {FastEat:Check} to "&eEnabled"
+						stop
+			if arg-2 is "disable":
+				set {FastEatCheckFFB:N} to false
+				wait 0.1 seconds
+				execute player command "/ChecksMenu"
+				loop all players:
+					if loop-player has permission "Nova.use":
+						message "{@MPrefix} &7» &aThe player: &e%sender% &ahas been &cdisable check FastEat" to loop-player
+						set {FastEat:Check} to "&eDisabled"
+						stop
+		if arg-1 is "fastplace":
+			if arg-2 is not set:
+				wait 0.1 seconds
+				open chest with 1 rows named "{@Prefix}> &eFastP" to player
+				wait 0.1 seconds
+				format slot 2 of player with Green Wool named "&aOn" to close then run [execute player command "/novatoggle fastplace enable"]
+				format slot 4 of player with Glass pane named "&bStatus: %{FastPlaceCheck}%" to close
+				format slot 6 of player with Red Wool named "&cOff" to close then run [execute player command "/novatoggle fastplace disable"]
+				stop
+			if arg-2 is "enable":
+				set {FastPlaceCheckFFB:N} to true
+				wait 0.1 seconds
+				execute player command "/ChecksMenu"
+				loop all players:
+					if loop-player has permission "Nova.use":
+						message "{@MPrefix} &7» &aThe player: &e%sender% &ahas been enable check &eFastPlace" to loop-player
+						set {FastPlaceCheck} to "&eEnabled"
+						stop
+			if arg-2 is "disable":
+				set {FastPlaceCheckFFB:N} to false
+				wait 0.1 seconds
+				execute player command "/ChecksMenu"
+				loop all players:
+					if loop-player has permission "Nova.use":
+						message "{@MPrefix} &7» &aThe player: &e%sender% &ahas been &cdisable check &eFastPlace" to loop-player
+						set {FastPlaceCheck} to "&eDisabled"
+						stop
+						
+# <!--! CLEAR COMMAND !--!>#
+command /NovaClear [<player>] [<text>]:
+	permission: Nova.use
+	permission message: {@NoPermission}
+	usage: /NovaClear [<player>] [<text>]
+	trigger:
+		if argument 1 is not set:
+			message "{@Prefix} &7» &cPlease use: &e/NovaClear (Player) (Check)." to sender
+			stop
+		if argument 2 is not set:
+			message "{@Prefix} &7» &cPlease use: &e/Nova HacksDetect &cAnd Select Check." to sender
+			stop			
+		if argument 2 is "all":
+			message "{@Prefix} &7» &aReset check successfully: &4All Checks" to sender
+			clear {VLKill::%arg 1%}
+			clear {VLNKB::%arg 1%}
+			set {KillauraCheck::%arg 1%} to false
+			clear {VLKillAura::%arg 1%}
+			clear {VLSFB::%arg 1%}
+			clear {VLJesus::%arg 1%}
+			clear {VLNSL::%arg 1%}
+			clear {fastpd::%player%}
+		if argument 2 is "Killaura":
+			message "{@Prefix} &7» &aReset check successfully: &4KillAura" to sender
+			clear {KillauraCheck::%arg 1%}
+			set {CheckKill::%arg 1%} to false
+			clear {VLKillAura::%arg 1%}
+			stop
+		if argument 2 is "Reach":
+			message "{@Prefix} &7» &aReset check successfully: &4Reach" to sender
+			clear {VLKill::%arg 1%}
+			stop
+		if argument 2 is "AntiKB":
+			message "{@Prefix} &7» &aReset check successfully: &4AntiKB" to sender
+			clear {VLNKB::%arg 1%}
+			stop
+		if argument 2 is "FastBow":
+			message "{@Prefix} &7» &aReset check successfully: &4FastBow" to sender
+			clear {VLSFB::%arg 1%}
+			stop	
+		if argument 2 is "Jesus":
+			message "{@Prefix} &7» &aReset check successfully: &4Jesus" to sender
+			clear {VLJesus::%arg 1%}
+			stop
+		if argument 2 is "FastPlace":
+			message "{@Prefix} &7» &aReset check successfully: &4FastPlace" to sender
+			clear {fastpd::%player%}
+			stop
+		
+# <!--! KICK COMMAND !--!>
+command /NovaKick [<player>] [<text>] [<text>]:
+	permission: Nova.Use
+	permission message: {@NoPermission}
+	usage: /NovaKick [<player>] [<text>] [<text>]
+	trigger:
+		if argument 1 is not set:
+			message "{@Prefix} &7» &ePlease Use: &a/NovaKick (Player) (Kill?) (Reason)" to sender
+			stop
+		if argument 2 is not set:
+			message "{@Prefix} &7» &eKill? example: &a/NovaKick Example &e&lYes/no &aExample" to sender
+			stop
+		if argument 1 is set:
+			if argument 2 is "No":
+				if argument 3 is not set:
+					message "{@Prefix} &7» &aYou kicked to: &c%arg 1% &afor: &fNo Reason" to sender
+					strike lightning effect at arg 1
+					kick arg 1 because "{@KickForCommand2}"
+		if argument 1 is set:
+			if argument 2 is "Yes":
+				if argument 3 is not set:
+					message "{@Prefix} &7» &aYou kicked to: &c%arg 1% &afor: &fNo Reason" to sender
+					kill arg 1
+					strike lightning effect at arg 1
+					kick arg 1 because "{@KickForCommand2}"
+		if argument 1 is set:
+			if argument 2 is "No":
+				if argument 3 is set:
+					message "{@Prefix} &7» &aYou kicked to: &c%arg 1% &afor: &f%arg 3%" to sender
+					strike lightning effect at arg 1
+					kick arg 1 because "{@KickForCommand1}"
+		if argument 1 is set:
+			if argument 2 is "Yes":
+				if argument 3 is set:
+					message "{@Prefix} &7» &aYou kicked to: &c%arg 1% &afor: &f%arg 3%" to sender
+					kill arg 1
+					strike lightning effect at arg 1
+					kick arg 1 because "{@KickForCommand1}"
+	
+				#-------------------------------#
+				#			  Reach		  		#
+				#-------------------------------#
+		
+on damage:
+	if {ReachCheckFFB:N} is true:
+	
+		# Normal Mode
+		if {TestMode::N} is false:
+			if attacker does not have permission "Nova.Bypass.Reach" or "Nova.Bypass.All":
+				if attacker is a player:
+					attacker is online
+					attacker's gamemode is not creative
+					if {KillauraCheck::%attacker%} > {@Killaura-CPS}:
+						stop
+					else if {KillauraCheck::%attacker%} < {@Killaura-CPS}:
+						set {_distance} to distance between attacker and victim
+						if {_distance} > {@Reach-Distance}:
+							if damage cause is not a projectile:
+								if {@Reach-Cancel} is true:
+									cancel event
+								add 1 to {VLKill::%attacker%}
+								add 1 to {VLBreaked::N}
+								loop all players:
+									loop-player has permission "Nova.Staff":
+										message "{@MPrefix} &7» {@AlertA} &4HitReach &8┃ &fVL: %{VLKill::%attacker%}%/3" to loop-player
+								{VLKill::%attacker%} >= 3:
+									set {KickReach::%attacker%} to true
+									if {KickReach::%attacker%} is true:
+										set {cheat} to "HitReach"
+										loop all players:
+											loop-player has permission "Nova.Staff":
+												message "{@MPrefix} &7» {@KickA}" to loop-player
+											strike lightning effect at attacker
+											kill attacker
+											message "{@MessageAllChat1A}" to players
+											message "{@SubPrefix} {@MessageAllChat2A}" to players
+											message "{@MessageAllChat3A}" to players
+											message "{@MessageAllChat4A}" to players
+											kick the attacker due to "{@AutoKickA}"
+											add 1 to {VLKicked::N}
+										clear {VLKill::%attacker%}
+										set {KickReach::%attacker%} to false
+
+		# Test Mode
+		if {TestMode::N} is true:
+			attacker's gamemode is not creative
+			if {KillauraCheck::%attacker%} > {@Killaura-CPS}:
+				stop
+			else if {KillauraCheck::%attacker%} < {@Killaura-CPS}:
+				set {_distance} to distance between attacker and victim
+				if {_distance} > {@Reach-Distance}:
+					if damage cause is not a projectile:
+						if {@Reach-Cancel} is true:
+							cancel event
+						add 1 to {VLKillTS::%attacker%}
+						loop all players:
+							loop-player has permission "Nova.Staff":
+								message "{@TMPrefix} &7» {@AlertA} &4HitReach &8┃ &fVL: %{VLKillTS::%attacker%}%" to loop-player
+						{VLKillTS::%attacker%} >= 3:
+							set {cheat} to "HitReach"
+							loop all players:
+								loop-player has permission "Nova.Staff":
+									message "{@TMPrefix} &7» {@KickA}" to loop-player
+								strike lightning effect at attacker
+							clear {VLKillTS::%attacker%}
+
+				#-------------------------------#
+				#			Killaura		  	#
+				#-------------------------------#
+							
+on damage:
+	if {TestMode::N} is false:
+		if tool of the attacker is a sword:
+			attacker is blocking
+			cancel event
+	if {TestMode::N} is true:
+		if tool of the attacker is a sword:
+			attacker is blocking
+			cancel event
+		
+on left click:
+	if {TestMode::N} is true or false:
+		add 1 to {KillauraCheck::%player%}
+
+every 2 seconds:
+	if {TestMode::N} is true or false:
+		if {AutoActiveKill::N} is false:
+			stop
+		else:
+			if {AutoActiveKill::N} is true:
+				set {ReachCheck::N} to true
+
+every 2 seconds:
+	if {TestMode::N} is true or false:
+		loop all players:
+			clear {KillauraCheck::%loop-player%}
+		
+on damage:
+	if {KillAuraCheckFFB:N} is true:
+		
+		# Normal Mode
+		if {TestMode::N} is false:
+			if attacker does not have permission "Nova.Bypass.KillAura" or "Nova.Bypass.All":
+				attacker is online
+				attacker's gamemode is not creative
+				set {_distance} to distance between attacker and victim
+				if {_distance} > {@Killaura-Distance}:
+					if {KillauraCheck::%attacker%} > {@Killaura-CPS}:
+						if damage cause is not a projectile:
+							if {@Killaura-Cancel} is true:
+								cancel event
+								teleport attacker to attacker
+							add 1 to {VLKillAura::%attacker%}
+							add 1 to {VLBreaked::N}
+							loop all players:
+								if loop-player has permission "Nova.Staff":
+									message "{@MPrefix} &7» {@AlertA} &4KillAura &8┃ &fVL: %{VLKillAura::%attacker%}%/5" to loop-player
+									set {ReachCheck::N} to false
+							{VLKillAura::%attacker%} >= 5:
+								set {KickKillAura::%attacker%} to true
+								if {KickKillAura::%attacker%} is true:
+									set {cheat} to "KillAura"
+									loop all players:
+										loop-player has permission "Nova.Staff":
+											message "{@MPrefix} &7» {@KickA}" to loop-player
+										strike lightning effect at attacker
+										kill attacker	
+										message "{@MessageAllChat1A}" to players
+										message "{@SubPrefix} {@MessageAllChat2A}" to players
+										message "{@MessageAllChat3A}" to players
+										message "{@MessageAllChat4A}" to players
+										kick the attacker due to "{@AutoKickA}"
+										add 1 to {VLKicked::N}
+									clear {VLKillAura::%attacker%}
+									set {KickKillAura::%attacker%} to false
+				if difference between {KACT::%attacker%} and now is less than {@Killaura-Ticks} ticks:
+					if {KillauraCheck::%attacker%} > {@Killaura-CPS}:
+						attacker is online
+						attacker is a player
+						attacker's gamemode is not creative
+						damage cause is not a projectile
+						if {@Killaura-Cancel} is true:
+							cancel event
+							teleport attacker to attacker
+						add 1 to {VLKillAura::%attacker%}
+						add 1 to {VLBreaked::N}
+						loop all players:
+							if loop-player has permission "Nova.Staff":
+								message "{@MPrefix} &7» {@AlertA} &4KillAura &8┃ &fVL: %{VLKillAura::%attacker%}%/5" to loop-player
+								set {ReachCheck::N} to false						
+						{VLKillAura::%attacker%} >= 5:
+							set {KickKillAura::%attacker%} to true
+							if {KickKillAura::%attacker%} is true:
+								set {cheat} to "KillAura"
+								loop all players:
+									loop-player has permission "Nova.Staff":
+										message "{@MPrefix} &7» {@KickA}" to loop-player
+									strike lightning effect at attacker
+									kill attacker	
+									message "{@MessageAllChat1A}" to players
+									message "{@SubPrefix} {@MessageAllChat2A}" to players
+									message "{@MessageAllChat3A}" to players
+									message "{@MessageAllChat4A}" to players
+									kick the attacker due to "{@AutoKickA}"
+									add 1 to {VLKicked::N}
+								clear {VLKillAura::%attacker%}
+								set {KickKillAura::%attacker%} to false				
+				set {KACT::%attacker%} to now
+		
+		# Test Mode
+		if {TestMode::N} is true:
+			attacker is online
+			attacker is a player
+			attacker's gamemode is not creative
+			set {_distance} to distance between attacker and victim
+			if {_distance} > {@Killaura-Distance}:
+				if {KillauraCheck::%attacker%} > {@Killaura-CPS}:
+					if damage cause is not a projectile:
+						if {@Killaura-Cancel} is true:
+							cancel event
+							teleport attacker to attacker
+						add 1 to {VLKillAuraTS::%attacker%}
+						loop all players:
+							if loop-player has permission "Nova.Staff":
+								message "{@TMPrefix} &7» {@AlertA} &4KillAura &8┃ &fVL: %{VLKillAuraTS::%attacker%}%" to loop-player
+								set {ReachCheck::N} to false
+						{VLKillAuraTS::%attacker%} >= 5:
+							set {cheat} to "KillAura"
+							loop all players:
+								loop-player has permission "Nova.Staff":
+									message "{@TMPrefix} &7» {@KickA}" to loop-player
+								strike lightning effect at attacker	
+							clear {VLKillAuraTS::%attacker%}
+			if difference between {KACTT::%attacker%} and now is less than 2.1 ticks:
+				if {KillauraCheck::%attacker%} > {@Killaura-CPS}:
+					attacker is online
+					attacker is a player
+					attacker's gamemode is not creative
+					damage cause is not a projectile
+					if {@Killaura-Cancel} is true:
+						cancel event
+						teleport attacker to attacker
+					add 1 to {VLKillAuraTS::%attacker%}
+					loop all players:
+						if loop-player has permission "Nova.Staff":
+							message "{@TMPrefix} &7» {@AlertA} &4KillAura &8┃ &fVL: %{VLKillAuraTS::%attacker%}%" to loop-player
+							set {ReachCheck::N} to false
+					{VLKillAuraTS::%attacker%} >= 5:
+						set {cheat} to "KillAura"
+						loop all players:
+							loop-player has permission "Nova.Staff":
+								message "{@TMPrefix} &7» {@KickA}" to loop-player
+							strike lightning effect at attacker	
+						clear {VLKillAuraTS::%attacker%}	
+			set {KACTT::%attacker%} to now				
+				
+				#-------------------------------#
+				#			Anti-KB		  	    #
+				#-------------------------------#
+
+on damage:
+	if {Anti-KB.CancelEvent.%victim%} is true:
+		if {AntiKBCheckFFB:N} is true:
+			
+			# Normal Mode
+			if {TestMode::N} is false:
+				if victim does not have permission "Nova.Bypass.Velocity" or "Nova.Bypass.All":
+					victim is online
+					victim is a player
+					victim is not riding
+					victim's food level is not 0
+					victim doesn't have poison
+					victim doesn't have wither
+					victim isn't burning
+					victim's gamemode is not creative
+					damage wasn't caused by fall , lightning, burning , poison or wither:
+						set {_pos1.%victim%} to location of victim
+						wait 6 tick
+						set {_pos1} to location of victim
+						wait 6 tick
+						if distance between {_pos1.%victim%} and victim is less than {@AntiKB-Distance}:
+							if block at victim is not cobweb:
+								if block 1.2 meter above victim is not cobweb:
+									set {_cancelevent1} to block above victim
+									if block above {_cancelevent1} is air:
+										set {_cancelevent2} to block above {_cancelevent1}
+										if block behind {_cancelevent2} is air:
+											if block 1.2 meter south of {_cancelevent2} is air:
+												if block 1.2 meter west of {_cancelevent2} is air:
+													if block 1.2 meter east of {_cancelevent2} is air:
+														if block 1.2 meter north of {_cancelevent2} is air:
+															set {_cancelevent3} to block behind victim
+															if block behind {_cancelevent3} is air:
+																set {_cancelevent4} to block above {_cancelevent3}
+																if block behind {_cancelevent4} is air:
+																	if block 1.2 meter northwest of {_cancelevent4} is air:
+																		if block 1.2 meter southwest of {_cancelevent4} is air:
+																			if block 1.2 meter southeast of {_cancelevent4} is air:
+																				if block 1.2 meter northeast of {_cancelevent4} is air:
+																					if {@AntiKB-Cancel} is true:
+																						teleport victim to {_pos1}
+																					add 1 to {VLNKB::%victim%}
+																					add 1 to {VLBreaked::N}
+																					loop all players:
+																						if loop-player has permission "Nova.Staff":
+																							message "{@MPrefix} &7» {@AlertV} &4AntiKnockback &8┃ &fVL: %{VLNKB::%victim%}%/5" to loop-player
+																					{VLNKB::%victim%} >= 5:
+																						set {kickantikb::%victim%} to true
+																						if {kickantikb::%victim%} is true:
+																							set {cheat} to "AntiKnockback"
+																							loop all players:
+																								if loop-player has permission "Nova.Staff":
+																									message "{@MPrefix} &7» {@KickV}" to loop-player
+																								strike lightning effect at victim
+																								kill victim
+																								message "{@MessageAllChat1V}" to players
+																								message "{@SubPrefix} {@MessageAllChat2V}" to players
+																								message "{@MessageAllChat3V}" to players
+																								message "{@MessageAllChat4V}" to players
+																								kick the victim due to "{@AutoKickV}"
+																								add 1 to {VLKicked::N}
+																							clear {VLNKB::%victim%}
+																							set {kickantikb::%victim%} to false
+	
+			# Test Mode
+			if {TestMode::N} is true:
+				victim is online
+				victim is a player
+				victim is not riding
+				victim's food level is not 0
+				victim doesn't have poison
+				victim doesn't have wither
+				victim isn't burning
+				victim's gamemode is not creative
+				damage wasn't caused by fall , lightning, burning , poison or wither:
+					set {_pos1.%victim%} to location of victim
+					wait 6 tick
+					set {_pos1} to location of victim
+					wait 6 tick
+					if distance between {_pos1.%victim%} and victim is less than {@AntiKB-Distance}:
+						if block at victim is not cobweb:
+							if block 1.2 meter above victim is not cobweb:
+								set {_cancelevent1} to block above victim
+								if block above {_cancelevent1} is air:
+									set {_cancelevent2} to block above {_cancelevent1}
+									if block behind {_cancelevent2} is air:
+										if block 1.2 meter south of {_cancelevent2} is air:
+											if block 1.2 meter west of {_cancelevent2} is air:
+												if block 1.2 meter east of {_cancelevent2} is air:
+													if block 1.2 meter north of {_cancelevent2} is air:
+														set {_cancelevent3} to block behind victim
+														if block behind {_cancelevent3} is air:
+															set {_cancelevent4} to block above {_cancelevent3}
+															if block behind {_cancelevent4} is air:
+																if block 1.2 meter northwest of {_cancelevent4} is air:
+																	if block 1.2 meter southwest of {_cancelevent4} is air:
+																		if block 1.2 meter southeast of {_cancelevent4} is air:
+																			if block 1.2 meter northeast of {_cancelevent4} is air:
+																				add 1 to {VLNKBTS::%victim%}
+																				if {@AntiKB-Cancel} is true:
+																					teleport victim to {_pos1}
+																				loop all players:
+																					if loop-player has permission "Nova.Staff":
+																						message "{@TMPrefix} &7» {@AlertV} &4AntiKnockback &8┃ &fVL: %{VLNKBTS::%victim%}%" to loop-player
+																				{VLNKBTS::%victim%} >= 5:
+																					set {cheat} to "AntiKnockback"
+																					loop all players:
+																						if loop-player has permission "Nova.Staff":
+																							message "{@TMPrefix} &7» {@KickV}" to loop-player
+																						strike lightning effect at victim
+																					clear {VLNKBTS::%victim%}
+
+				#-------------------------------#
+				#			 FastBow		  	#
+				#-------------------------------#
+
+#Check 1:
+on shoot:
+	if {FastBowCheckFFB:N} is true:
+	
+		# Normal Mode
+		if {TestMode::N} is false:
+			if shooter does not have permission "Nova.Bypass.FastBow" or "Nova.Bypass.All":
+				if projectile is an arrow:
+					if shooter is set:
+						shooter is online
+						shooter is a player
+						add 1 to {ShootCheckFB::%shooter%}
+						if {ShootCheckFB::%shooter%} >= {@FastBow-Shoots}:
+							set {FirstShoot::%shooter%} to false
+							add 1 to {VLSFB::%shooter%}
+							add 1 to {VLBreaked::N}
+							loop all players:
+								if loop-player has permission "Nova.Staff":
+									message "{@MPrefix} &7» {@AlertS} &4FastBow &8┃ &fVL: %{VLSFB::%shooter%}%/3" to loop-player
+							if {VLSFB::%shooter%} >= 3:
+								set {kickfastbow1::%shooter%} to true
+								if {kickfastbow1::%shooter%} is true:
+									set {cheat} to "FastBow"
+									loop all players:
+										if loop-player has permission "Nova.Staff":
+											message "{@MPrefix} &7» {@KickS}" to loop-player
+										strike lightning effect at shooter
+										kill shooter
+										message "{@MessageAllChat1S}" to players
+										message "{@SubPrefix} {@MessageAllChat2S}" to players
+										message "{@MessageAllChat3S}" to players
+										message "{@MessageAllChat4S}" to players
+										kick the shooter due to "{@AutoKickS}"
+										add 1 to {VLKicked::N}
+									clear {VLSFB::%shooter%}
+									set {kickfastbow1::%shooter%} to false
+						wait 1.1 seconds
+						clear {ShootCheckFB::%shooter%} 
+					if shooter is set:
+						if projectile is an arrow:
+							if difference between {fastboowcheck.%shooter%} and now is less than {@FastBow-Ticks} ticks:
+								shooter is online
+								shooter is a player
+								add 1 to {VLSFB::%shooter%}
+								add 1 to {VLBreaked::N}
+								loop all players:		
+									if loop-player has permission "Nova.Staff":
+										message "{@MPrefix} &7» {@AlertS} &4FastBow &8┃ &fVL: %{VLSFB::%shooter%}%/3" to loop-player
+								if {VLSFB::%shooter%} >= 3:
+									set {kickfastbow2::%shooter%} to true
+									if {kickfastbow2::%shooter%} is true:
+										set {cheat} to "FastBow"
+										loop all players:
+											if loop-player has permission "Nova.Staff":
+												message "{@MPrefix} &7» {@KickS}" to loop-player
+											strike lightning effect at shooter
+											kill shooter
+											message "{@MessageAllChat1S}" to players
+											message "{@SubPrefix} {@MessageAllChat2S}" to players
+											message "{@MessageAllChat3S}" to players
+											message "{@MessageAllChat4S}" to players
+											kick the shooter due to "{@AutoKickS}"
+											add 1 to {VLKicked::N}
+										clear {VLSFB::%shooter%}
+										set {kickfastbow2::%shooter%} to false
+							set {fastboowcheck.%shooter%} to now
+
+		# Test Mode
+		if {TestMode::N} is true:
+			if shooter is set:
+				shooter is a player
+				shooter is online
+				add 1 to {ShootCheckFB::%shooter%}
+				if {ShootCheckFB::%shooter%} >= {@FastBow-Shoots}:
+					add 1 to {VLSFBTS::%shooter%}
+					loop all players:
+						if loop-player has permission "Nova.Staff":
+							message "{@TMPrefix} &7» {@AlertS} &4FastBow &8┃ &fVL: %{VLSFBTS::%shooter%}%" to loop-player
+					if {VLSFBTS::%shooter%} >= 3:
+						set {cheat} to "FastBow"
+						loop all players:
+							if loop-player has permission "Nova.Staff":
+								message "{@TMPrefix} &7» {@KickS}" to loop-player
+							strike lightning effect at shooter
+						clear {VLSFBTS::%shooter%}
+				wait 1.1 seconds
+				clear {ShootCheckFB::%shooter%}
+			if shooter is set:
+				shooter is a player
+				shooter is online
+				if difference between {fastboowcheck.%shooter%} and now is less than {@FastBow-Ticks} ticks:
+					add 1 to {VLSFBTS::%shooter%}
+					loop all players:		
+						if loop-player has permission "Nova.Staff":
+							message "{@TMPrefix} &7» {@AlertS} &4FastBow &8┃ &fVL: %{VLSFBTS::%shooter%}%" to loop-player
+					if {VLSFBTS::%shooter%} >= 3:
+						set {cheat} to "FastBow"
+						loop all players:
+							if loop-player has permission "Nova.Staff":
+								message "{@TMPrefix} &7» {@KickS}" to loop-player
+							strike lightning effect at shooter
+						clear {VLSFBTS::%shooter%}
+				set {fastboowcheck.%shooter%} to now
+
+				#-------------------------------#
+				#			  Jesus		  		#
+				#-------------------------------#
+
+on walk on water:
+	if {JesusCheckFFB:N} is true:
+	
+		# Normal Mode
+		if {TestMode::N} is false:
+			if player does not have permission "Nova.Bypass.Jesus" or "Nova.Bypass.All":
+				player is a player
+				player's gamemode is not creative
+				player is online
+				if block {@Jesus-Distance} west below player is water:
+					if block {@Jesus-Distance} north below player is water:
+						if block {@Jesus-Distance} south below player is water:
+							if block {@Jesus-Distance} east below player is water:
+								if block {@Jesus-Distance} southwest below player is water:
+									if block {@Jesus-Distance} northwest below player is water:
+										if block {@Jesus-Distance} southeast below player is water:
+											if block {@Jesus-Distance} northeast below player is water:
+												block at player is air
+												block under player is water
+												wait 6 tick
+												set {_pos1} to location of player
+												wait 5 tick
+												block at player is air
+												set {blockpos::%player%} to block under player
+												if {blockpos::%player%} is water:
+													add 1 to {TestJesus::%player%}
+													if {TestJesus::%player%} >= 3:
+														if {blockpos::%player%} is water:
+															add 1 to {VLJesus::%player%}
+															add 1 to {VLBreaked::N}
+															loop all players:
+																loop-player has permission "Nova.Staff":
+																	message "{@MPrefix} &7» {@AlertP} &4Jesus &8┃ &fVL: %{VLJesus::%player%}%/3" to loop-player
+																if {@Jesus-Cancel} is true:
+																	teleport player to {_pos1}
+														if {VLJesus::%player%} >= 3:
+															set {kickjesus::%player%} to true
+															if {kickjesus::%player%} is true:
+																set {cheat} to "Jesus"
+																loop all players:
+																	loop-player has permission "Nova.Staff":
+																		message "{@MPrefix} &7» {@KickP}" to loop-player
+																	strike lightning effect at player
+																kill player
+																message "{@MessageAllChat1P}" to players
+																message "{@SubPrefix} {@MessageAllChat2P}" to players
+																message "{@MessageAllChat3P}" to players
+																message "{@MessageAllChat4P}" to players
+																kick the player due to "{@AutoKickP}"
+																add 1 to {VLKicked::N}
+																clear {VLJesus::%player%}
+																clear {TestJesus::%player%}
+																set {kickjesus::%player%} to false
+
+		# Test Mode
+		if {TestMode::N} is true:
+			player is a player
+			player's gamemode is not creative
+			player is online
+			if block {@Jesus-Distance} west below player is water:
+				if block {@Jesus-Distance} north below player is water:
+					if block {@Jesus-Distance} south below player is water:
+						if block {@Jesus-Distance} east below player is water:
+							if block {@Jesus-Distance} southwest below player is water:
+								if block {@Jesus-Distance} northwest below player is water:
+									if block {@Jesus-Distance} southeast below player is water:
+										if block {@Jesus-Distance} northeast below player is water:
+											block at player is air
+											block under player is water
+											wait 6 tick
+											set {_pos1} to location of player
+											wait 5 tick
+											block at player is air
+											set {tblockpos::%player%} to block under player
+											if {tblockpos::%player%} is water:
+												add 1 to {TestJesusTS::%player%}
+												if {TestJesusTS::%player%} >= 3:
+													if {blockpos::%player%} is water:
+														if {@Jesus-Cancel} is true:
+															teleport player to {_pos1}
+														add 1 to {tVLJesusTS::%player%}
+														loop all players:
+															loop-player has permission "Nova.Staff":
+																message "{@TMPrefix} &7» {@AlertP} &4Jesus &8┃ &fVL: %{tVLJesusTS::%player%}%" to loop-player															
+													if {tVLJesusTS::%player%} >= 3:
+														set {cheat} to "Jesus"
+														loop all players:
+															loop-player has permission "Nova.Staff":
+																message "{@TMPrefix} &7» {@KickP}" to loop-player
+															strike lightning effect at player
+														clear {tVLJesusTS::%player%}
+														clear {TestJesusTS::%player%}
+
+				#-------------------------------#
+				#			  FastEat	  		#
+				#-------------------------------#
+
+on consume:
+	if {FastEatCheckFFB:N} is true:
+	
+		# Normal Mode
+		if {TestMode::N} is false:
+			if player does not have permission "Nova.Bypass.FastEat" or "Nova.Bypass.All":
+				player is online
+				player's gamemode is not creative:
+					if difference between {fasteatcheck.%player%} and now is less than {@FastEat-Second} second:
+						set {fasteatcheck.%player%} to now
+						add 1 to {VLEat::%player%}
+						add 1 to {VLBreaked::N}
+						if {@FastEat-Cancel} is true:
+							cancel the event
+						set {cheat} to "FastEat"
+						loop all players:
+							if loop-player has permission "Nova.Staff":
+								message "{@MPrefix} &7» {@AlertP} &4FastEat &8┃ &fVL: %{VLEat::%player%}%/1" to loop-player
+								message "{@MPrefix} &7» {@KickP}" to loop-player
+							strike lightning effect at player
+						kill player
+						message "{@MessageAllChat1P}" to players
+						message "{@SubPrefix} {@MessageAllChat2P}" to players
+						message "{@MessageAllChat3P}" to players
+						message "{@MessageAllChat4P}" to players
+						kick the player due to "{@AutoKickP}"
+						add 1 to {VLKicked::N}
+						clear {TestJesus::%player%}
+						clear {VLEat::%player%}
+						stop
+					set {fasteatcheck.%player%} to now
+		
+		# Test Mode
+		if {TestMode::N} is true:
+			player's gamemode is not creative:
+				if difference between {tfasteatcheck.%player%} and now is less than {@FastEat-Second} second:
+					if {@FastEat-Cancel} is true:
+						cancel the event
+						teleport player to player
+					set {tfasteatcheck.%player%} to now
+					add 1 to {TestFastEat::%player%}
+					loop all players:
+						if loop-player has permission "Nova.Staff":
+							set {cheat} to "FastEat"
+							message "{@TMPrefix} &7» {@AlertP} &4FastEat &8┃ &fVL: %{TestFastEat::%player%}%/1" to loop-player
+							message "{@TMPrefix} &7» {@KickP}" to loop-player
+						strike lightning effect at player
+					clear {TestFastEat::%player%}
+					stop
+				set {tfasteatcheck.%player%} to now
+				
+				#-------------------------------#
+				#			FastPlace	  	    #
+				#-------------------------------#	
+	
+on place:
+	if {FastPlaceCheckFFB:N} is true:
+	
+		# Normal Mode
+		if {TestMode::N} is false:
+			if player does not have permission "Nova.Bypass.FastPlace" or "Nova.Bypass.All":
+				player is a player
+				player is online
+				player's gamemode is not creative
+				add 1 to {fastplace::%player%}
+				if {fastplace::%player%} > {@FastPlace-Blocks}:
+					if {@FastPlace-Cancel} is true:
+						cancel the event
+					add 1 to {fastpd::%player%}
+					add 1 to {VLBreaked::N}
+					loop all players:
+						if loop-player has permission "Nova.Staff":
+							message "{@Prefix} &7» {@AlertP} &4FastPlace &8┃ &fVL: %{fastpd::%player%}%/3" to loop-player
+							clear {fastplace::%player%}
+					if {fastpd::%player%} >= 3:
+						set {kickFP::%player%} to true
+						if {kickFP::%player%} is true:
+							set {cheat} to "FastPlace"
+							loop all players:
+								if loop-player has permission "Nova.Staff":
+									message "{@Prefix} &7» {@KickP}" to loop-player
+								strike lightning effect at player
+							kill player
+							message "{@MessageAllChat1P}" to players
+							message "{@SubPrefix} {@MessageAllChat2P}" to players
+							message "{@MessageAllChat3P}" to players
+							message "{@MessageAllChat4P}" to players
+							kick the player due to "{@AutoKickP}"
+							add 1 to {VLKicked::N}
+							clear {fastplace::%player%}
+							clear {fastpd::%player%}
+							set {kickFP::%player%} to false
+				wait {@FastPlace-Reset} second
+				set {fastplace::%player%} to 0	
+				
+		# Test Mode
+		if {TestMode::N} is true:
+			player is a player
+			player is online
+			player's gamemode is not creative
+			add 1 to {tfastplace::%player%}
+			if {tfastplace::%player%} > {@FastPlace-Blocks}:
+				if {@FastPlace-Cancel} is true:
+					cancel the event
+				add 1 to {tfastpd::%player%}
+				loop all players:
+					if loop-player has permission "Nova.Staff":
+						message "{@TMPrefix} &7» {@AlertP} &4FastPlace &8┃ &fVL: %{tfastpd::%player%}%/3" to loop-player
+						clear {tfastplace::%player%}
+				if {tfastpd::%player%} >= 3:
+					set {cheat} to "FastPlace"
+					set {tkickFP::%player%} to true
+					if {tkickFP::%player%} is true:
+						loop all players:
+							if loop-player has permission "Nova.Staff":
+								message "{@TMPrefix} &7» {@KickP}" to loop-player
+							strike lightning effect at player
+						clear {tfastpd::%player%}
+						clear {tfastplace::%player%}
+						set {tkickFP::%player%} to false
+			wait {@FastPlace-Reset} second
+			set {tfastplace::%player%} to 0			

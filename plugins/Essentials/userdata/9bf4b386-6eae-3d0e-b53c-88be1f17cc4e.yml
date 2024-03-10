@@ -1,0 +1,38 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 127.0.0.1
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: false
+timestamps:
+  lastteleport: 0
+  lastheal: 0
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1709998051336
+  login: 1709998001349
+money: '0'
+last-account-name: SdheroPro
+logoutlocation:
+  world: 183078cb-30cf-47c0-850b-8d429f46e466
+  world-name: lobby
+  x: 74.81155113461519
+  y: 6.0
+  z: 42.72800923424109
+  yaw: 89.99932861328125
+  pitch: -2.850036859512329
+lastlocation:
+  world: a8cf0997-bcfe-4091-80e9-c4669857ecca
+  world-name: survival
+  x: -210.4509659014892
+  y: 65.86804621010549
+  z: -1426.4177399319785
+  yaw: -159.6006622314453
+  pitch: 18.899986267089844
